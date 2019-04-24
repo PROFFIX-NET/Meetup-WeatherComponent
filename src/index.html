@@ -11,7 +11,29 @@
 </head>
 
 <body>
-  <app-root></app-root>
+  <app-weathercomponent city="Diepoldsau"></app-weathercomponent>
+  <app-weathercomponent city="Buchs"></app-weathercomponent>
+  <div id="events"></div>
+
+  <script src="https://code.jquery.com/jquery-3.4.0.slim.min.js" integrity="sha256-ZaXnYkHGqIhqTbJ6MB4l9Frs/r7U4jlx7ir8PJYBqbI=" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+      $("app-weathercomponent").on("switchTemperatur", function (event) {
+        $("#events").prepend("<div>" + $(this).attr("city") + ": " + event.detail);
+      })
+    });
+
+    /* Variante in Vanilla JS, ohne jQuery
+    Array.prototype.forEach.call(document.getElementsByTagName("app-weathercomponent"), function (element) {
+      element.addEventListener("switchTemperatur", function (event) {
+        var entry = document.createElement("div");
+        entry.appendChild(document.createTextNode(event.target.getAttribute("city") + ": " + event.detail));
+        var loghost = document.getElementById("events");
+        loghost.insertBefore(entry, loghost.firstChild);
+      })
+    });
+    */
+  </script>
 </body>
 
 </html>

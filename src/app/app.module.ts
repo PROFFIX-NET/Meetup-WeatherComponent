@@ -1,27 +1,40 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { NgModule, Injector } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { createCustomElement } from '@angular/elements';
 
-import { AppComponent } from './app.component';
 import { WeatherComponent } from './weather/weather.component';
 import { WeatherService } from './weather/weather.service';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
-    AppComponent,
+    WeatherComponent
+  ],
+  entryComponents: [ // Components müssen zu EntryComponents hinzugefügt werden, damit sie von Angular ohne Referenz in einem Template geladen werden
     WeatherComponent
   ],
   imports: [
-    BrowserModule,
     BrowserAnimationsModule,
+    BrowserModule,
     HttpClientModule
   ],
   providers: [
     WeatherService
-  ],
-  bootstrap: [
-    AppComponent
   ]
+
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(injector: Injector) {
+
+    // Custom Element definieren und in CustomElementsRegistry anmelden
+    const weatherElement = createCustomElement(WeatherComponent, { injector });
+    window.customElements.define('app-weathercomponent', weatherElement);
+
+  }
+
+  // Bootstrapping manuell auslösen
+  ngDoBootstrap() {
+
+  }
+}

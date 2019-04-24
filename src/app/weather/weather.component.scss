@@ -1,0 +1,74 @@
+$size: 250px;
+$color: #666;
+$lineColor: lighten($color, 50%);
+$lineThickness: 2px;
+
+.weatherbox {
+  width: $size;
+  height: $size;
+  text-align: center;
+  font: 13px Verdana, sans-serif;
+  color: $color;
+  background-image: radial-gradient(lighten($color, 70%), lighten($color, 55%));
+  border-radius: 0 0 $size / 2 $size / 2;
+  border: $lineColor $lineThickness solid;
+  box-shadow: 0px 1px 15px rgba(black, 0.05);
+
+  h2 {
+    font-size: 1.4em;
+    padding: 10px 5px;
+    margin: 0;
+    border-bottom: $lineColor $lineThickness solid;
+  }
+  p {
+    padding: 0 10px 5px 10px;
+  }
+  img {
+    width: 64px;
+  }
+  a {
+    color: $color;
+  }
+  a:hover {
+    color: darken($color, 15%);
+  }
+}
+
+
+// Loading Spinner
+.loadingbox {
+  display: flex;
+  position: absolute;
+  width: $size;
+  height: $size;
+
+  > div {
+    margin: auto;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    background-color: lighten($color, 40%);
+    margin: 100px auto;
+    -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+    animation: rotateplane 1.2s infinite ease-in-out;
+  }
+}
+@-webkit-keyframes rotateplane {
+  0% { -webkit-transform: perspective(120px) }
+  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+@keyframes rotateplane {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+  } 50% {
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+  } 100% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}

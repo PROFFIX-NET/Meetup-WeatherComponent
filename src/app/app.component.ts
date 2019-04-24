@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'WeatherWebComponent';
+
+  onTempSwitch(value) {
+    console.log(`Temperatur Switch: ${value}`);
+  }
 }

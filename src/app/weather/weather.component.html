@@ -1,0 +1,23 @@
+<div class="weatherbox">
+  <div class="loadingbox" [@loadingVisible]="loading">
+    <div class="spinner" role="status">
+    </div>
+  </div>
+  <div class="contentbox" [@contentVisible]="!loading">
+    <ng-container *ngIf="error">
+      <h2>Fehler</h2>
+      <p>Es ist ein Fehler beim laden des Wetters aufgetreten:</p>
+      <p style="word-wrap: break-word">{{error}}</p>
+    </ng-container>
+    <ng-container *ngIf="currentWeather">
+      <h2>{{currentWeather.city}}</h2>
+      <p><img class="conditionicon" [src]="currentWeather.conditionImageUrl" /></p>
+      <p>
+        {{currentWeather.conditionText}}<br>
+        bei<br>
+        <a href="" *ngIf="showTempFeelslike" (click)="toggleTemperatur($event)">{{currentWeather?.currentTemperatur}}°C</a>
+        <a href="" *ngIf="!showTempFeelslike" (click)="toggleTemperatur($event)">{{currentWeather?.feelslikeTemperatur}}°C gefühlt</a>
+      </p>
+    </ng-container>
+  </div>
+</div>
